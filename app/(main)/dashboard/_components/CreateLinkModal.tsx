@@ -16,7 +16,7 @@ const CreateLinkModal = ({ onClose }: CreateLinkModalProps) => {
   const [formData, setFormData] = useState<Url>({
     title: "",
     longUrl: "",
-    customUrl: "",
+    shortUrl: "",
     qrCode: "",
     userId: "",
   });
@@ -143,7 +143,7 @@ const CreateLinkModal = ({ onClose }: CreateLinkModalProps) => {
             </div>
             <div>
               <label
-                htmlFor="customUrl"
+                htmlFor="shortUrl"
                 className="mb-2 text-white font-medium text-sm block"
               >
                 Custom Url (optional)
@@ -154,11 +154,11 @@ const CreateLinkModal = ({ onClose }: CreateLinkModalProps) => {
                 </div>
                 <div className="flex items-center">/</div>
                 <input
-                  type="customUrl"
+                  type="shortUrl"
                   className="bg-black text-white placeholder-white focus:outline-none border border-white px-4 py-3 w-full"
                   placeholder="Custom short URL"
-                  name="customUrl"
-                  value={formData.customUrl}
+                  name="shortUrl"
+                  value={formData.shortUrl}
                   onChange={handleInputChange}
                 />
               </div>

@@ -124,15 +124,11 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
                 <p className="text-gray-300">Short URL</p>
                 <div className="flex gap-2 items-center mt-1">
                   <div className="border border-white px-2 flex-1 h-8 text-xs flex items-center">
-                    localhost:3000/{link.customUrl || link.shortUrl}
+                    localhost:3000/{link.shortUrl}
                   </div>
                   <button
                     className="w-10 h-10 border bg-black hover:bg-white border-white hover:border-black flex justify-center items-center text-white hover:text-black transition-colors duration-300"
-                    onClick={() =>
-                      handleCopy(
-                        (link.shortUrl as string) || (link.customUrl as string)
-                      )
-                    }
+                    onClick={() => handleCopy(link.shortUrl)}
                   >
                     {copied ? <Check size={18} /> : <CopyIcon size={18} />}
                   </button>
@@ -174,11 +170,7 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
                 </button>
                 <button
                   className="flex-1 px-4 py-2 bg-black hover:bg-white transition-colors duration-300 text-white hover:text-black border border-white mb-8 flex items-center space-x-3"
-                  onClick={() =>
-                    handleCopy(
-                      (link.shortUrl as string) || (link.customUrl as string)
-                    )
-                  }
+                  onClick={() => handleCopy(link.shortUrl)}
                 >
                   {copied ? <Check size={16} /> : <CopyIcon size={16} />}
                   <span className="text-sm">{copied ? "Copied" : "Copy"}</span>

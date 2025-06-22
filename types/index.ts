@@ -18,7 +18,7 @@ export interface User {
 export interface Url {
   title: string;
   longUrl: string;
-  customUrl?: string;
+  shortUrl?: string;
   qrCode: string;
   userId: string;
 }

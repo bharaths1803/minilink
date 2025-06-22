@@ -7,11 +7,16 @@ import { revalidatePath } from "next/cache";
 
 export async function createUrl(data: Omit<Url, "id">) {
   try {
-    const shortUrl = `${Math.random().toString(36).substring(2, 6)}`;
+    let createdShortUrl: string = "";
+    if (!data.shortUrl || data.shortUrl.length == 0)
+      createdShortUrl = `${Math.random().toString(36).substring(2, 6)}`;
     const url = await prisma.url.create({
       data: {
         ...data,
-        shortUrl,
+        shortUrl:
+          data.shortUrl && data.shortUrl.length > 0
+            ? data.shortUrl
+            : createdShortUrl,
       },
     });
     revalidatePath("/dashboard");
