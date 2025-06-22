@@ -14,3 +14,11 @@ export interface User {
   email: string;
   id: string;
 }
+
+export interface Url {
+  title: string;
+  longUrl: string;
+  customUrl?: string;
+  qrCode: string;
+  userId: string;
+}

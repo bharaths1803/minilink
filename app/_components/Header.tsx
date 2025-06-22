@@ -27,7 +27,7 @@ const Header = () => {
     setLoggingout(false);
   };
   return (
-    <header className="sticky top-0 z-50 bg-black border-b-2 border-white">
+    <header className="sticky top-0 bg-black border-b-2 border-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="h-16 flex justify-between">
           <div className="flex items-center space-x-2">
