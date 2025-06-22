@@ -6,11 +6,12 @@ import {
   CopyIcon,
   Download,
   ExternalLink,
+  FilterIcon,
   LinkIcon,
   PlusIcon,
   Trash,
 } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import CreateLinkModal from "./CreateLinkModal";
 import { getDashboardData } from "@/actions/dashboard.action";
 import router from "next/navigation";
@@ -28,6 +29,7 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const [deletingLink, setDeletingLink] = useState<{
     urlId: string;
@@ -72,6 +74,17 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
     document.body.removeChild(link);
   };
 
+  const filteredLinks = useMemo(() => {
+    let result = dashboardData.links;
+    if (searchTerm) {
+      const searchTermLower = searchTerm.toLowerCase();
+      result = result.filter((link) =>
+        link.title.toLowerCase().includes(searchTermLower)
+      );
+    }
+    return result;
+  }, [searchTerm]);
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -111,9 +124,22 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
         </div>
       </div>
 
-      {dashboardData.links.length > 0 ? (
+      {/* Search */}
+      <div className="flex-1 relative">
+        <input
+          type="text"
+          className="border border-white placeholder-gray-500 px-4 py-3 bg-black text-white focus:outline-none text-lg w-full"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Filter Links"
+        />
+        <div className="absolute right-0 inset-y-0 pointer-events-none pr-3 flex items-center">
+          <FilterIcon size={18} />
+        </div>
+      </div>
+
+      {filteredLinks.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {dashboardData.links.map((link) => (
+          {filteredLinks.map((link) => (
             <div
               className="border-2 border-white text-white p-4 space-y-4"
               key={link.id}
