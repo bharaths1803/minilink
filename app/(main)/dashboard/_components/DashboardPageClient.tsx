@@ -34,6 +34,7 @@ const DashboardPageClient = ({
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [copyUrlId, setCopyUrlId] = useState<string>("");
 
   const [deletingLink, setDeletingLink] = useState<{
     urlId: string;
@@ -59,9 +60,11 @@ const DashboardPageClient = ({
     setShowDeleteModal(true);
   };
 
-  const handleCopy = async (url: string) => {
+  const handleCopy = async (url: string, copyUrlId: string) => {
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(
+        `https://minilink-pi.vercel.app/${url}`
+      );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
@@ -162,9 +165,13 @@ const DashboardPageClient = ({
                   </div>
                   <button
                     className="w-10 h-10 border bg-black hover:bg-white border-white hover:border-black flex justify-center items-center text-white hover:text-black transition-colors duration-300"
-                    onClick={() => handleCopy(link.shortUrl)}
+                    onClick={() => handleCopy(link.shortUrl, link.id)}
                   >
-                    {copied ? <Check size={18} /> : <CopyIcon size={18} />}
+                    {copied && copyUrlId === link.id ? (
+                      <Check size={18} />
+                    ) : (
+                      <CopyIcon size={18} />
+                    )}
                   </button>
                 </div>
               </div>
@@ -204,9 +211,13 @@ const DashboardPageClient = ({
                 </button>
                 <button
                   className="flex-1 px-4 py-2 bg-black hover:bg-white transition-colors duration-300 text-white hover:text-black border border-white mb-8 flex items-center space-x-3"
-                  onClick={() => handleCopy(link.shortUrl)}
+                  onClick={() => handleCopy(link.shortUrl, link.id)}
                 >
-                  {copied ? <Check size={16} /> : <CopyIcon size={16} />}
+                  {copied && copyUrlId === link.id ? (
+                    <Check size={16} />
+                  ) : (
+                    <CopyIcon size={16} />
+                  )}
                   <span className="text-sm">{copied ? "Copied" : "Copy"}</span>
                 </button>
                 <button
