@@ -136,7 +136,7 @@ const DashboardPageClient = ({
       <div className="flex-1 relative">
         <input
           type="text"
-          className="border border-white placeholder-white px-4 py-3 bg-black text-white focus:outline-none text-lg w-full"
+          className="border border-white placeholder-white px-4 py-3 bg-black text-white focus:outline-none text-lg w-full z-10"
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Filter Links"
         />
