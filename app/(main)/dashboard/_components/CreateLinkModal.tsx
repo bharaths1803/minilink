@@ -31,6 +31,8 @@ const CreateLinkModal = ({ onClose, createUrlLink }: CreateLinkModalProps) => {
     const errors: Record<string, string> = {};
     if (!formData.title) errors.title = "Title is required.";
     if (!formData.longUrl) errors.longUrl = "Url is required.";
+    else if (formData.longUrl.length <= 5)
+      errors.longUrl = "Url must be of atleast length 5.";
     if (!formData.qrCode) errors.qrCode = "Qrcode is required.";
     setFormErrors(errors);
     return Object.keys(errors).length === 0;

@@ -62,7 +62,7 @@ const Header = () => {
                     <div className="py-2">
                       <div className="px-4 py-2 border-b border-white">
                         <p className="text-sm font-medium">{user.username}</p>
-                        <p className="text-xs text-gray-300">{user.username}</p>
+                        <p className="text-xs text-gray-300">{user.email}</p>
                       </div>
                       <button
                         className="px-4 py-2 bg-black hover:bg-white transition-colors duration-300 text-white hover:text-black flex items-center space-x-2 mt-2.5 w-full"
@@ -75,10 +75,13 @@ const Header = () => {
                           </>
                         )}
                         {loggingout && (
-                          <Loader
-                            size={18}
-                            className="animate-spin text-center"
-                          />
+                          <>
+                            <Loader
+                              size={18}
+                              className="animate-spin text-center"
+                            />
+                            <span className="text-sm">Logging out</span>
+                          </>
                         )}
                       </button>
                     </div>

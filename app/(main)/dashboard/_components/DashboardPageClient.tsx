@@ -158,7 +158,7 @@ const DashboardPageClient = ({
                 <p className="text-gray-300">Short URL</p>
                 <div className="flex gap-2 items-center mt-1">
                   <div className="border border-white px-2 flex-1 h-8 text-xs flex items-center">
-                    https://minilink-pi.vercel.app//{link.shortUrl}
+                    https://minilink-pi.vercel.app/{link.shortUrl}
                   </div>
                   <button
                     className="w-10 h-10 border bg-black hover:bg-white border-white hover:border-black flex justify-center items-center text-white hover:text-black transition-colors duration-300"

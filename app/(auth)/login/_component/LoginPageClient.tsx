@@ -120,7 +120,8 @@ const LoginPageClient = ({ createUrl }: LoginPageClientProps) => {
       const userRes = await fetch("/api/me");
       const user = await userRes.json();
       setUser(user);
-      router.push(`/dashboard?createUrl=${createUrl}`);
+      if (createUrl) router.push(`/dashboard?createUrl=${createUrl}`);
+      else router.push("/dashboard");
     } else {
       const data = await res.json();
       toast.error(data.error);
@@ -155,7 +156,7 @@ const LoginPageClient = ({ createUrl }: LoginPageClientProps) => {
       <div className="w-full max-w-md">
         <button
           className="flex-1 px-4 py-2 bg-black hover:bg-white transition-colors duration-300 text-white hover:text-black border border-white mb-8 flex items-center space-x-3"
-          onClick={() => router.back()}
+          onClick={() => router.push("/")}
         >
           <ArrowLeft className="h-4 w-4" />
           <span className="text-sm">Back to home</span>
