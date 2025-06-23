@@ -127,9 +127,9 @@ export async function getLocationDetails(urlId: string) {
     let locationDetails: { [key: string]: number } = {};
 
     url?.clicks.forEach((click) => {
-      if (!locationDetails[`${click.country},${click.city}`])
-        locationDetails[`${click.country},${click.city}`] = 0;
-      locationDetails[`${click.country},${click.city}`] += 1;
+      if (!locationDetails[`${click.city},${click.country}`])
+        locationDetails[`${click.city},${click.country}`] = 0;
+      locationDetails[`${click.city},${click.country}`] += 1;
     });
 
     return Object.entries(locationDetails).map(([name, count]) => ({
