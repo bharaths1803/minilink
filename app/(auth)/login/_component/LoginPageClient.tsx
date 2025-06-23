@@ -143,7 +143,8 @@ const LoginPageClient = ({ createUrl }: LoginPageClientProps) => {
       const userRes = await fetch("/api/me");
       const user = await userRes.json();
       setUser(user);
-      router.push("/dashboard");
+      if (createUrl) router.push(`/dashboard?createUrl=${createUrl}`);
+      else router.push("/dashboard");
     } else {
       const data = await res.json();
       toast.error(data.error);
