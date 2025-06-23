@@ -1,4 +1,6 @@
+import { getDbUserId } from "@/lib/getCurrentUser";
 import LoginPageClient from "./_component/LoginPageClient";
+import { redirect } from "next/navigation";
 
 interface LoginPageProps {
   searchParams: Promise<{ [key: string]: string }>;
@@ -6,6 +8,8 @@ interface LoginPageProps {
 
 const LoginPage = async ({ searchParams }: LoginPageProps) => {
   const { createUrl } = await searchParams;
+  const userId = await getDbUserId();
+  if (userId) redirect("/dashboard");
   return <LoginPageClient createUrl={createUrl} />;
 };
 
