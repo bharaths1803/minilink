@@ -57,9 +57,6 @@ export async function getUrlDetails(urlId: string) {
         clicks: {
           select: {
             id: true,
-            device: true,
-            city: true,
-            country: true,
           },
         },
       },
