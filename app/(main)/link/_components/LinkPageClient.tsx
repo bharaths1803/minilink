@@ -51,6 +51,7 @@ const LinkPageClient = ({
 }: LinkPageClientProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
+  const [copyUrlId, setCopyUrlId] = useState<string>("");
 
   const router = useRouter();
 
@@ -62,11 +63,12 @@ const LinkPageClient = ({
     setShowDeleteModal(true);
   };
 
-  const handleCopy = async (url: string) => {
+  const handleCopy = async (url: string, copyUrlId: string) => {
     try {
       await navigator.clipboard.writeText(
         `https://minilink-pi.vercel.app/${url}`
       );
+      setCopyUrlId(copyUrlId);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
@@ -125,7 +127,12 @@ const LinkPageClient = ({
             </button>
             <button
               className="flex-1 px-4 py-2 bg-black hover:bg-white transition-colors duration-300 text-white hover:text-black border border-white mb-8 flex items-center space-x-3"
-              onClick={() => handleCopy(urlDetails?.shortUrl || "")}
+              onClick={() =>
+                handleCopy(
+                  urlDetails?.shortUrl as string,
+                  urlDetails?.id as string
+                )
+              }
             >
               {copied ? <Check size={16} /> : <CopyIcon size={16} />}
               <span className="text-sm">{copied ? "Copied" : "Copy"}</span>

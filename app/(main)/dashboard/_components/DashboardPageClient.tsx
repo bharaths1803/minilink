@@ -65,6 +65,7 @@ const DashboardPageClient = ({
       await navigator.clipboard.writeText(
         `https://minilink-pi.vercel.app/${url}`
       );
+      setCopyUrlId(copyUrlId);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
