@@ -23,7 +23,7 @@ const DeleteLinkModal = ({ onClose, urlId, title }: DeleteLinkModalProps) => {
       onClose();
       if (res?.success) {
         toast.success("Deleted link successfully!");
-        router.push("/dashboard");
+        // router.push("/dashboard");
       } else throw new Error(res?.error as string);
     } catch (error) {
       toast.error("Failed to delete link!");
