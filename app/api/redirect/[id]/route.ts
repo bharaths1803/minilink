@@ -14,7 +14,7 @@ export async function POST(
   const ua = req.headers.get("ua-headers") || "";
   const parser = new UAParser(ua);
   const device = parser.getDevice().type || "desktop";
-
+  console.log("Device name", parser.getDevice().type);
   const geoRes = await fetch(`https://ipwho.is/${ip}`);
   const { city, country } = await geoRes.json();
 
