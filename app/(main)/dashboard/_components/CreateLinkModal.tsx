@@ -150,7 +150,7 @@ const CreateLinkModal = ({ onClose }: CreateLinkModalProps) => {
               </label>
               <div className="flex gap-2">
                 <div className="bg-black text-white placeholder-white focus:outline-none border border-white px-4 py-3 w-full">
-                  localhost:3000
+                  https://minilink-ohcz.vercel.app
                 </div>
                 <div className="flex items-center">/</div>
                 <input
