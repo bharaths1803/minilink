@@ -91,7 +91,7 @@ const DashboardPageClient = ({
       );
     }
     return result;
-  }, [searchTerm]);
+  }, [searchTerm, dashboardData]);
 
   useEffect(() => {
     if (createUrl && createUrl.length > 0) setShowModal(true);
@@ -219,7 +219,9 @@ const DashboardPageClient = ({
                   ) : (
                     <CopyIcon size={16} />
                   )}
-                  <span className="text-sm">{copied ? "Copied" : "Copy"}</span>
+                  <span className="text-sm">
+                    {copied && copyUrlId === link.id ? "Copied" : "Copy"}
+                  </span>
                 </button>
                 <button
                   className="flex-1 px-4 py-2 bg-black hover:bg-red-500 transition-colors duration-300 text-white border border-white mb-8 flex items-center space-x-3"
