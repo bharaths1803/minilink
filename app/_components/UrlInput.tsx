@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "./AuthContext";
 
 const UrlInput = () => {
   const [longUrl, setLongUrl] = useState<string>("");
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="flex flex-col sm:flex-row gap-2">
@@ -16,7 +18,11 @@ const UrlInput = () => {
         onChange={(e) => setLongUrl(e.target.value)}
       />
       <Link
-        href={`/dashboard/${longUrl}`}
+        href={
+          user
+            ? `/dashboard/?createUrl=${longUrl}`
+            : `/login/?createUrl=${longUrl}`
+        }
         className="px-8 py-3 bg-white hover:bg-black transition-colors duration-300 text-black hover:text-white border border-black hover:border-white font-semibold"
       >
         Shorten

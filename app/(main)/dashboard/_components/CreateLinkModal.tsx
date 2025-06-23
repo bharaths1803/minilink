@@ -10,9 +10,10 @@ import { AuthContext } from "@/app/_components/AuthContext";
 
 interface CreateLinkModalProps {
   onClose: () => void;
+  createUrlLink: string;
 }
 
-const CreateLinkModal = ({ onClose }: CreateLinkModalProps) => {
+const CreateLinkModal = ({ onClose, createUrlLink }: CreateLinkModalProps) => {
   const [formData, setFormData] = useState<Url>({
     title: "",
     longUrl: "",
@@ -86,6 +87,15 @@ const CreateLinkModal = ({ onClose }: CreateLinkModalProps) => {
     }
   }, [formData.longUrl]);
 
+  useEffect(() => {
+    if (createUrlLink && createUrlLink.length > 0) {
+      setFormData((p) => ({
+        ...p,
+        longUrl: createUrlLink,
+      }));
+    }
+  }, [createUrlLink]);
+
   return (
     <>
       <div className="h-full bg-black opacity-50 z-40 fixed inset-0" />
@@ -154,7 +164,7 @@ const CreateLinkModal = ({ onClose }: CreateLinkModalProps) => {
                 </div>
                 <div className="flex items-center">/</div>
                 <input
-                  type="shortUrl"
+                  type="text"
                   className="bg-black text-white placeholder-white focus:outline-none border border-white px-4 py-3 w-full"
                   placeholder="Custom short URL"
                   name="shortUrl"

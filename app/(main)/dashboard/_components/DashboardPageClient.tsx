@@ -11,7 +11,7 @@ import {
   PlusIcon,
   Trash,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CreateLinkModal from "./CreateLinkModal";
 import { getDashboardData } from "@/actions/dashboard.action";
 import router from "next/navigation";
@@ -23,9 +23,13 @@ type DashboardData = Awaited<ReturnType<typeof getDashboardData>>;
 
 interface DashboardPageClientProps {
   dashboardData: DashboardData;
+  createUrl: string;
 }
 
-const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
+const DashboardPageClient = ({
+  dashboardData,
+  createUrl,
+}: DashboardPageClientProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
@@ -84,6 +88,10 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
     }
     return result;
   }, [searchTerm]);
+
+  useEffect(() => {
+    if (createUrl && createUrl.length > 0) setShowModal(true);
+  }, [createUrl]);
 
   return (
     <div className="space-y-6">
@@ -229,7 +237,9 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
         </div>
       )}
 
-      {showModal && <CreateLinkModal onClose={handleCloseModal} />}
+      {showModal && (
+        <CreateLinkModal onClose={handleCloseModal} createUrlLink={createUrl} />
+      )}
 
       {showDeleteModal && (
         <DeleteLinkModal

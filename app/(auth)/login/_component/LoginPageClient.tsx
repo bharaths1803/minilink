@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 import { useContext, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
-const LoginPageClient = () => {
+interface LoginPageClientProps {
+  createUrl: string;
+}
+
+const LoginPageClient = ({ createUrl }: LoginPageClientProps) => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"LOGIN" | "SIGNUP">("LOGIN");
   const imageUploadRef = useRef<null | HTMLInputElement>(null);
@@ -116,7 +120,7 @@ const LoginPageClient = () => {
       const userRes = await fetch("/api/me");
       const user = await userRes.json();
       setUser(user);
-      router.push("/dashboard");
+      router.push(`/dashboard?createUrl=${createUrl}`);
     } else {
       const data = await res.json();
       toast.error(data.error);
