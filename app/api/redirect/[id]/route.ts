@@ -11,7 +11,7 @@ export async function POST(
     req.headers.get("x-forwarded-for")?.split(",")[0] ??
     req.headers.get("x-real-ip") ??
     "203.0.113.45";
-  const ua = req.headers.get("ua-headers") || "";
+  const ua = req.headers.get("user-agent") || "";
   const parser = new UAParser(ua);
   const device = parser.getDevice().type || "desktop";
   console.log("Device name", parser.getDevice().type);
