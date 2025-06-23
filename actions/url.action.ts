@@ -2,7 +2,6 @@
 
 import prisma from "@/lib/prisma";
 import { Url } from "@/types";
-import { url } from "inspector";
 import { revalidatePath } from "next/cache";
 
 export async function createUrl(data: Omit<Url, "id">) {
@@ -44,5 +43,118 @@ export async function deleteUrl(urlId: string) {
   } catch (error) {
     console.log("Error in delete url", error);
     return { success: false, error };
+  }
+}
+
+export async function getUrlDetails(urlId: string) {
+  try {
+    const url = await prisma.url.findUnique({
+      where: {
+        id: urlId,
+      },
+      include: {
+        clicks: {
+          select: {
+            id: true,
+            device: true,
+            city: true,
+            country: true,
+          },
+        },
+      },
+    });
+    return url;
+  } catch (error) {
+    console.log("Error in getting url details", error);
+    throw new Error("Error getting url details");
+  }
+}
+
+export async function getDeviceDetails(urlId: string) {
+  try {
+    const url = await prisma.url.findUnique({
+      where: {
+        id: urlId,
+      },
+      include: {
+        clicks: {
+          select: {
+            id: true,
+            device: true,
+            city: true,
+            country: true,
+          },
+        },
+      },
+    });
+
+    let deviceDetails: { [key: string]: number } = {};
+
+    url?.clicks.forEach((click) => {
+      if (!deviceDetails[click.device]) deviceDetails[click.device] = 0;
+      deviceDetails[click.device] += 1;
+    });
+
+    return Object.entries(deviceDetails).map(([name, value]) => ({
+      name,
+      value,
+    }));
+  } catch (error) {
+    console.log("Error in getting device details", error);
+    throw new Error("Error getting device details");
+  }
+}
+
+export async function getLocationDetails(urlId: string) {
+  try {
+    const url = await prisma.url.findUnique({
+      where: {
+        id: urlId,
+      },
+      include: {
+        clicks: {
+          select: {
+            id: true,
+            device: true,
+            city: true,
+            country: true,
+          },
+        },
+      },
+    });
+
+    let locationDetails: { [key: string]: number } = {};
+
+    url?.clicks.forEach((click) => {
+      if (!locationDetails[`${click.country},${click.city}`])
+        locationDetails[`${click.country},${click.city}`] = 0;
+      locationDetails[`${click.country},${click.city}`] += 1;
+    });
+
+    return Object.entries(locationDetails).map(([name, count]) => ({
+      name,
+      count,
+    }));
+  } catch (error) {
+    console.log("Error in getting location details", error);
+    throw new Error("Error getting location details");
+  }
+}
+
+export async function getUrlDetailsByShortUrl(shortUrl: string) {
+  try {
+    const url = await prisma.url.findFirst({
+      where: {
+        shortUrl,
+      },
+      select: {
+        id: true,
+        longUrl: true,
+      },
+    });
+    return url;
+  } catch (error) {
+    console.log("Error in getting url details by short url", error);
+    throw new Error("Error getting url details by short url");
   }
 }

@@ -12,9 +12,6 @@ export async function getDashboardData(userId: string) {
         clicks: {
           select: {
             id: true,
-            device: true,
-            city: true,
-            country: true,
           },
         },
       },

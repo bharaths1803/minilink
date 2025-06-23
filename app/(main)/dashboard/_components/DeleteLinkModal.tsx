@@ -2,6 +2,7 @@
 
 import { deleteUrl } from "@/actions/url.action";
 import { Loader, Trash, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,14 +14,17 @@ interface DeleteLinkModalProps {
 
 const DeleteLinkModal = ({ onClose, urlId, title }: DeleteLinkModalProps) => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleDelete = async () => {
     try {
       setIsDeleting(true);
       const res = await deleteUrl(urlId);
       onClose();
-      if (res?.success) toast.success("Deleted link successfully!");
-      else throw new Error(res?.error as string);
+      if (res?.success) {
+        toast.success("Deleted link successfully!");
+        router.push("/dashboard");
+      } else throw new Error(res?.error as string);
     } catch (error) {
       toast.error("Failed to delete link!");
     } finally {

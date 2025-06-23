@@ -128,7 +128,7 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
       <div className="flex-1 relative">
         <input
           type="text"
-          className="border border-white placeholder-gray-500 px-4 py-3 bg-black text-white focus:outline-none text-lg w-full"
+          className="border border-white placeholder-white px-4 py-3 bg-black text-white focus:outline-none text-lg w-full"
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Filter Links"
         />
@@ -182,7 +182,7 @@ const DashboardPageClient = ({ dashboardData }: DashboardPageClientProps) => {
               <div className="inline-flex space-x-3">
                 <Link
                   className="flex-1 px-4 py-2 bg-black hover:bg-white transition-colors duration-300 text-white hover:text-black border border-white mb-8 flex items-center space-x-3"
-                  href={`/link/${link.shortUrl}`}
+                  href={`/link/${link.id}`}
                 >
                   <ExternalLink size={16} />
                   <span className="text-sm">Visit</span>
