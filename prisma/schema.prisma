@@ -30,7 +30,7 @@ model Url {
   longUrl   String
   shortUrl  String
   qrCode    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   createdAt DateTime @default(now())
   clicks    Click[]
@@ -41,6 +41,6 @@ model Click {
   device  String
   city    String
   country String
-  url     Url    @relation(fields: [urlId], references: [id])
+  url     Url    @relation(fields: [urlId], references: [id], onDelete: Cascade)
   urlId   String
 }
