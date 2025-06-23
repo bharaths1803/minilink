@@ -187,7 +187,7 @@ const LinkPageClient = ({
               </div>
             </div>
           ) : (
-            <div className="flex justify-center items-center text-white">
+            <div className="h-full flex justify-center items-center text-white">
               <h3 className="text-xl sm:text-3xl lg:text-5xl">No Stats</h3>
             </div>
           )}
