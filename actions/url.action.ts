@@ -39,6 +39,7 @@ export async function deleteUrl(urlId: string) {
       },
     });
     revalidatePath("/dashboard");
+    revalidatePath("/link");
     return { success: true };
   } catch (error) {
     console.log("Error in delete url", error);

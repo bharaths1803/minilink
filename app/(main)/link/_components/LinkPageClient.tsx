@@ -65,7 +65,7 @@ const LinkPageClient = ({
   const handleCopy = async (url: string) => {
     try {
       await navigator.clipboard.writeText(
-        `https://minilink-ohcz.vercel.app/${url}`
+        `https://minilink-pi.vercel.app//${url}`
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -94,7 +94,7 @@ const LinkPageClient = ({
             className="text-lg md:text-xl text-white font-semibold block"
             href={`/${urlDetails?.shortUrl}`}
           >
-            https://minilink-ohcz.vercel.app/{urlDetails?.shortUrl}
+            https://minilink-pi.vercel.app//{urlDetails?.shortUrl}
           </Link>
           <div className="flex items-start max-w-md break-all space-x-2">
             <LinkIcon size={18} className="mt-1" />
