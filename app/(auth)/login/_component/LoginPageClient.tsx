@@ -106,14 +106,14 @@ const LoginPageClient = () => {
     e.preventDefault();
     if (!validateLoginForm()) return;
     setIsSubmitting(true);
-    const res = await fetch("/api/login", {
+    const res = await fetch("https://minilink-ohcz.vercel.app/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify(loginFormData),
     });
     if (res.ok) {
-      const userRes = await fetch("/api/me");
+      const userRes = await fetch("https://minilink-ohcz.vercel.app/api/me");
       const user = await userRes.json();
       setUser(user);
       router.push("/dashboard");
@@ -128,14 +128,14 @@ const LoginPageClient = () => {
     e.preventDefault();
     if (!validateSignupForm()) return;
     setIsSubmitting(true);
-    const res = await fetch("/api/signup", {
+    const res = await fetch("https://minilink-ohcz.vercel.app/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify(signupFormData),
     });
     if (res.ok) {
-      const userRes = await fetch("/api/me");
+      const userRes = await fetch("https://minilink-ohcz.vercel.app/api/me");
       const user = await userRes.json();
       setUser(user);
       router.push("/dashboard");
