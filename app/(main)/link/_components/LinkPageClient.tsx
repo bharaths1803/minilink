@@ -154,7 +154,7 @@ const LinkPageClient = ({
         </div>
 
         <div className="space-y-4 border-2 border-white flex-1">
-          {deviceData && deviceData.length > 0 && (
+          {deviceData && deviceData.length > 0 ? (
             <div className="p-6">
               <h2 className="text-xl mb-6">Device Type</h2>
               <div className="h-72">
@@ -185,6 +185,10 @@ const LinkPageClient = ({
                   </PieChart>
                 </ResponsiveContainer>
               </div>
+            </div>
+          ) : (
+            <div className="text-center text-white">
+              <h3 className="text-sm sm:text-lg lg:text-2xl">No Stats</h3>
             </div>
           )}
 
