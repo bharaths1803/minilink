@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { getUrlDetailsByShortUrl } from "@/actions/url.action";
 import RedirectPageClient from "./_components/RedirectPageClient";
 

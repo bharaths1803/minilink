@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { getDashboardData } from "@/actions/dashboard.action";
 import DashboardPageClient from "./_components/DashboardPageClient";
 import { getDbUserId } from "@/lib/getCurrentUser";
